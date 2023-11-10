@@ -1,0 +1,142 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model DIS_Project.Dto.ContactDto
+
+<link href="~/css/main.css" rel="stylesheet">
+<script src="~/js/main.js"></script>
+
+<body>
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="hero">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="hero_img text-center">
+                    <img src="~/Images/main-photo.png" class="img-fluid" alt="main image" data-aos="zoom-out" data-aos-delay="300">
+                </div>
+                <div class="hero_text d-flex flex-column justify-content-center align-items-center">
+                    <h2 data-aos="fade-up">Respect, Not Road Rage<br>Drive with courtesy</h2>
+                    <b data-aos="fade-up" data-aos-delay="100" class="text-dark">
+                        Your Destination is a Reward for Safe Driving.
+                        Your Destination Shouldn't be here
+                    </b><br>
+                    @* <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+                        <a href="#schedule_call" class="schedule_call">Schedule Tour/Call</a>
+                    </div> *@
+                </div>
+            </div>
+        </div>
+    </section><!-- End Hero Section -->
+
+    <main id="main">
+
+        <!-- ======= About Section ======= -->
+        <section id="about" class="about">
+            <div class="container-fluid " data-aos="fade-up">
+
+                <div class="section-header">
+                    <h2>About Us</h2>
+                    <p>Learn More <span>About Us</span></p>
+                </div>
+                <div class="about-section d-flex">
+                    <div class="police_img">
+                        <img src="~/Images/police-1.png" alt="PoliceImage" class="about-us-img" data-aos="fade-up"
+                             data-aos-delay="300">
+                    </div>
+                    <div class="content" data-aos="fade-up" data-aos-delay="300">
+                        <p>
+                            Greetings from CRF, the ultimate online source for accessingl ocal accident and crash reports.
+                            Our platform is made to make it easy and convenient for everyone to obtain vital information
+                            concerning traffic incidents, including law enforcement, insurance experts, and individuals.
+                        </p>
+                        <ul>
+                            <li>
+                                <i class="bi bi-check2-all"></i><b>Easy-to-use Search:</b> You can easily locate the accident
+                                records you require using our user-friendly search engine. To obtain exact results, refine your
+                                search by incident type, date, or location.
+                            </li>
+                            <li>
+                                <i class="bi bi-check2-all"></i><b> Database: </b> We keep a vast archive of accident reports, so
+                                you may find information on a variety of accidents, from small collisions to more significant ones.
+                            </li>
+                            <li>
+                                <i class="bi bi-check2-all"></i> <b> Access and Detailed Reports: </b> No waiting or going to
+                                other offices is required. Instantaneously download the reports you've ordered from the comfort of
+                                your home or place of business which contain all the pertinent information, including the date,
+                                time, place, individuals involved, and an overview of the event
+                            </li>
+                        </ul>
+                        <p>
+                            Our goal is to provide easy access to accident information for people who most need it.
+                            CRF can help you if you're an individual looking for information for insurance claims,
+                            a legal professional investigating cases, or a concerned citizen wanting to learn more about
+                            road safety in your neighborhood.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End About Section -->
+
+        <!-- ======= Contact Section ======= -->
+        <section id="contact" class="contact">
+            <div class="container-fluid" data-aos="fade-up">
+
+                <div class="section-header">
+                    <h2>Contact</h2>
+                    <p>Need Help? <span>Contact Us</span></p>
+                </div>
+
+
+                @using (Html.BeginForm("Create", "Contact", FormMethod.Post, new { @class = "email-form", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+                        <div class="col-xl-6 form-group">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Your Name" })
+                            @Html.ValidationMessageFor(m => m.Name,"", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-xl-6 form-group">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Your Email", type = "email" })
+                            @Html.ValidationMessageFor(m => m.Email,"", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", placeholder = "Subject" })
+                        @Html.ValidationMessageFor(m => m.Subject,"", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextAreaFor(m => m.Message, new { @class = "form-control", rows = "5", placeholder = "Message" })
+                        @Html.ValidationMessageFor(m => m.Message,"", new { @class = "text-danger" })
+                    </div>
+                    <div class="my-3">
+                        <div class="loading">Loading</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">ViewBag.InformationMessage</div>
+                    </div>
+                    <div class="text-center"><button type="submit">Send Message</button></div>
+                }
+
+                <!--End Contact Form -->
+
+            </div>
+        </section><!-- End Contact Section -->
+
+    </main><!-- End #main -->
+
+
+    <!-- Vendor JS Files -->
+    <script src="src/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="src/vendor/aos/aos.js"></script>
+    <script src="src/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="src/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="src/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="src/js/main.js"></script>
+
+</body>
+
+

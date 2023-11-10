@@ -1,0 +1,97 @@
+﻿@model DIS_Project.Dto.CrashRecordDto
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Edit Crash Record";
+}
+
+
+@using (Html.BeginForm("Edit", "CrashRecords", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Edit Crash Record</h4>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CrashId)
+        <div class="row">
+            <div class="form-group col-md-6 fw-bold">
+                @Html.LabelFor(model => model.CrashLocation, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.CrashLocation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CrashLocation, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6 fw-bold">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 fw-bold">
+                @Html.LabelFor(model => model.CrashDateTime, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.CrashDateTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CrashDateTime, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6 fw-bold">
+                @Html.LabelFor(model => model.Injuries, htmlAttributes: new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.Injuries, new { @class = "form-control",@style = "width: 100%;"  })
+                @Html.ValidationMessageFor(model => model.Injuries, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 fw-bold">
+                @Html.LabelFor(model => model.AdditionalInformation, htmlAttributes: new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.AdditionalInformation,  new { @class = "form-control", @style = "width: 100%;"  })
+                @Html.ValidationMessageFor(model => model.AdditionalInformation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Assuming you have ViewBag items like ViewBag.WeatherConditionSelectList -->
+        <div class="row">
+            <div class="form-group col-md-6 fw-bold">
+                @Html.LabelFor(model => model.WeatherConditionId, "Weather Condition", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.WeatherConditionId, (SelectList)ViewBag.WeatherConditions, "-- Select Weather Condition --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.WeatherConditionId, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6 fw-bold">
+                @Html.LabelFor(model => model.RoadConditionId,"Road Condition", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.RoadConditionId, (SelectList)ViewBag.RoadConditions, "Choose...", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RoadConditionId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 fw-bold">
+                @Html.LabelFor(model => model.RoadCharacterId,"Road Character", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.RoadCharacterId, (SelectList)ViewBag.RoadCharacters, "Choose...", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RoadCharacterId, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6 fw-bold">
+                @Html.LabelFor(model => model.RoadConfigurationId,"Road Configuration", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.RoadConfigurationId, (SelectList)ViewBag.RoadConfigurations, "Choose...", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RoadConfigurationId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 fw-bold">
+                @Html.LabelFor(model => model.VehicleTypeId,"Vehicle Type", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.VehicleTypeId, (SelectList)ViewBag.VehicleTypes, "Choose...", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.VehicleTypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                     <button type="submit" asp-controller="CrashRecords" asp-action="Edit" class="btn btn-primary btn-sm text-light">Save</button>
+            </div>
+            <div class="form-group col-md-4">
+                 <a asp-action="Index" class="btn btn-primary btn-sm text-light">Back to List</a>
+             </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

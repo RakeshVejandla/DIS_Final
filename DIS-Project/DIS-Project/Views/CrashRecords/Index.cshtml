@@ -1,0 +1,268 @@
+﻿@model DIS_Project.Dto.CrashSearchViewModel  // Assuming your model is a list of CrashRecordDto for displaying search results
+
+@{
+    ViewBag.Title = "Crash Records Search";
+}
+
+
+<script src="~/js/site.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<h4>@ViewBag.Title</h4>
+<div class="container-fluid">
+<!-- Search Form -->
+    @using (Html.BeginForm("Index", "CrashRecords", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) // Assuming your search action is "Index" in "CrashRecordsController"
+{
+    <div class="row">
+        <div class="col-md-4 fw-bold">
+                @Html.LabelFor(m => m.CrashId , new { @class = "control-label "})
+                @Html.TextBox("CrashId", null, new { @class = "form-control", type = "number" })
+        </div>
+        <div class="col-md-4 fw-bold">
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBox("Email", null, new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-4 fw-bold">
+            @Html.LabelFor(model => model.WeatherConditionId, "Weather Condition", htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.WeatherConditionId, Model.WeatherConditions, "-- Select Weather Condition --", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group  col-md-4 fw-bold">
+            @Html.LabelFor(model => model.RoadConditionId, "Road Condition", htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.RoadConditionId, Model.RoadConditions, "-- Select Road Condition --", new { @class = "form-control" })
+        </div>
+        <div class="form-group  col-md-4 fw-bold">
+            @Html.LabelFor(model => model.RoadCharacterId, "Road Character", htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.RoadCharacterId, Model.RoadCharacters, "-- Select Road Character --", new { @class = "form-control" })
+        </div>
+        <div class="col-md-4 p-20 d-grid ">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+    <br />
+        <a href="@Url.Action("Create", "CrashRecords", new {  })" class="btn btn-primary text-light btn-lg">Create New Record</a>
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Crash ID</th>
+            <th>Email</th>
+            <th>Crash Date/Time</th>
+            <th>Year</th>
+            <th>Weather Condition</th>
+            <th>Road Character</th>
+            <th>Road Condition</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="table-body">
+        <!-- JavaScript will populate table body -->
+    </tbody>
+</table>
+
+<div id="pagination-controls" style="text-align:center"></div>
+<div class = "row">
+    <div class="col-md-6">
+        <canvas id="yearlyCrashChart" width="400" height="400"></canvas>
+    </div>
+    <div class="col-md-6">
+        <canvas id="roadConditionChart" width="400" height="400"></canvas>
+    </div>
+</div>
+    <script>
+        let yearlyCrashChart;
+        let roadConditionChart;
+        const pageSize = 30; // Set the number of records per page
+        let currentPage = 1; // Current page starts at 1
+
+        // Convert your server-side Model.CrashRecord to a JavaScript array
+        const crashData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.CrashRecord));
+        const totalPages = Math.ceil(crashData.length / pageSize); // Calculate the total number of pages
+
+        function renderTable(page) {
+            const start = (page - 1) * pageSize;
+            const end = start + pageSize;
+            const pageData = crashData.slice(start, end); // Get the data for the current page
+
+            const tableBody = document.getElementById('table-body');
+            tableBody.innerHTML = ''; // Clear the previous rows
+
+            // Add new rows to the table body
+            pageData.forEach(item => {
+                const row = `<tr>
+                    <td>${item.CrashId}</td>
+                    <td>${item.Email}</td>
+                    <td>${item.CrashDateTime}</td>
+                    <td>${item.CrashYear}</td>
+                    <td>${item.WeatherConditionDescription}</td>
+                    <td>${item.RoadCharacterDescription}</td>
+                    <td>${item.RoadConditionDescription}</td>
+                    <td>
+                        <a href="/CrashRecords/Edit/${item.CrashId}" class="btn btn-primary text-light btn-sm">Edit</a>
+                        <a href="/CrashRecords/Details/${item.CrashId}" class="btn btn-secondary text-light btn-sm">Details</a>
+                        <a href="/CrashRecords/Delete/${item.CrashId}" class="btn btn-danger text-light btn-sm">Delete</a>
+                    </td>
+                </tr>`;
+                tableBody.innerHTML += row; // Append the row to the table body
+            });
+        }
+
+        function renderPagination() {
+            const pagination = document.getElementById('pagination-controls');
+            pagination.innerHTML = ''; // Clear the previous pagination controls
+
+            // Create and append the pagination buttons
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement('button');
+                button.innerText = i;
+                button.addEventListener('click', function () {
+                    // Update the active class on buttons
+                    const currentActive = document.querySelector('#pagination-controls .active');
+                    if (currentActive) {
+                        currentActive.classList.remove('active');
+                    }
+                    button.classList.add('active');
+
+                    // Change page
+                    currentPage = i;
+                    updatePageAndCharts(currentPage);
+                });
+                if (currentPage === i) {
+                    button.classList.add('active');
+                }
+                pagination.appendChild(button);
+            }
+        }
+
+        function prepareChartData(pageData) {
+            let yearCounts = {};
+            let roadConditionCounts = {};
+
+            pageData.forEach(item => {
+                yearCounts[item.CrashYear] = (yearCounts[item.CrashYear] || 0) + 1;
+                roadConditionCounts[item.RoadConditionDescription] = (roadConditionCounts[item.RoadConditionDescription] || 0) + 1;
+            });
+
+            return {
+                yearCounts: Object.entries(yearCounts).sort().map(([year, count]) => ({ year, count })),
+                roadConditionCounts: Object.entries(roadConditionCounts).sort().map(([condition, count]) => ({ condition, count }))
+            };
+        }
+
+        // Render the chart for crash years
+        function renderYearChart(data) {
+            if (!yearlyCrashChart) {
+                const ctx = document.getElementById('yearlyCrashChart').getContext('2d');
+                        yearlyCrashChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map(d => d.year),
+                        datasets: [{
+                            label: 'Crashes by Year',
+                            data: data.map(d => d.count),
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
+                        }],
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                            },
+                        },
+                    },
+                });
+            } else {
+                // Update the chart's data
+                yearlyCrashChart.data.labels = data.map(d => d.year);
+                yearlyCrashChart.data.datasets[0].data = data.map(d => d.count);
+                yearlyCrashChart.update();
+            }
+            
+        }
+
+        // Render the chart for road conditions
+        function renderRoadConditionChart(data) {
+            if (!roadConditionChart) {
+                const ctx = document.getElementById('roadConditionChart').getContext('2d');
+                roadConditionChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map(d => d.condition),
+                        datasets: [{
+                            label: 'Number of Crashes by Road Condition',
+                            data: data.map(d => d.count),
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                            },
+                        },
+                    },
+                });
+            } else {
+                roadConditionChart.data.labels = data.map(d => d.condition);
+                roadConditionChart.data.datasets[0].data = data.map(d => d.count);
+                roadConditionChart.update();
+            }
+        }
+
+        // Update the page and charts
+        function updatePageAndCharts(page) {
+            const pageData = crashData.slice((page - 1) * pageSize, page * pageSize);
+            renderTable(page);
+            const chartData = prepareChartData(pageData);
+            renderYearChart(chartData.yearCounts);
+            renderRoadConditionChart(chartData.roadConditionCounts);
+            renderPagination();
+        }
+
+        // Initial call
+        updatePageAndCharts(1);
+
+    </script>
+    <style>
+        #pagination-controls button {
+            background-color: #f8f9fa;
+            color: #007bff;
+            border: 1px solid #dee2e6;
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+            #pagination-controls button:hover {
+                background-color: #e2e6ea;
+            }
+
+            #pagination-controls button.active {
+                background-color: #007bff;
+                color: white;
+                border-color: #007bff;
+            }
+
+            #pagination-controls button:disabled {
+                background-color: #f8f9fa;
+                color: #6c757d;
+                cursor: not-allowed;
+            }
+    </style>
+
+
+</div>
+
+
+
+

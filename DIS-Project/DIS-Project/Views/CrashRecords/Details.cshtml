@@ -1,0 +1,104 @@
+﻿@model DIS_Project.Dto.CrashRecordDto
+
+@{
+    ViewBag.Title = "Crash Record Details";
+}
+
+<h2>Crash Record Details</h2>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.CrashId)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.CrashId)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.CrashDateTime)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.CrashDateTime)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.CrashYear)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.CrashYear)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.CrashLocation)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.CrashLocation)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Injuries)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Injuries)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.AdditionalInformation)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.AdditionalInformation)
+            </dd>
+
+            <dt class="col-sm-4">
+                Road Character
+            </dt>
+            <dd class="col-sm-8">
+                @ViewBag.RoadCharacterDescription
+            </dd>
+
+            <dt class="col-sm-4">
+                Road Condition
+            </dt>
+            <dd class="col-sm-8">
+                @ViewBag.RoadConditionDescription
+            </dd>
+
+            <dt class="col-sm-4">
+                Weather Condition
+            </dt>
+            <dd class="col-sm-8">
+                @ViewBag.WeatherConditionDescription
+            </dd>
+
+            <dt class="col-sm-4">
+                Weather Condition
+            </dt>
+            <dd class="col-sm-8">
+                @ViewBag.RoadConfigurationDescription
+            </dd>
+
+            <dt class="col-sm-4">
+                Weather Condition
+            </dt>
+            <dd class="col-sm-8">
+                @ViewBag.VehicleTypeDescription
+            </dd>
+
+            <!-- Add additional fields as necessary -->
+        </dl>
+    </div>
+</div>
+
+<div class="form-group">
+    <a href="@Url.Action("Edit", "CrashRecords", new { id = Model.CrashId })" class="btn btn-primary">Edit</a>
+    <a href="@Url.Action("Index", "CrashRecords")" class="btn btn-default">Back to List</a>
+</div>

@@ -1,0 +1,170 @@
+﻿
+@{
+    ViewData["Title"] = "View";
+}
+
+
+<div class="container-fluid">
+    <!-- ========= About Us ============== -->
+    <section id="about_us" class="about_us">
+        <h1 class="heading">ABOUT US</h1>
+        <div class="container d-flex" data-aos="fade-up">
+
+            <div class="item">
+                <div class="profile_img text-center">
+                    <img src="~/Images/team/Rakesh.jpg" class="img-fluid" id="profile_image_one" alt="main image"
+                         data-aos="zoom-out" data-aos-delay="300">
+                    <div class="profile_text_one" style="padding: 20px;">
+                        <button type="button" class="btn btn-info" onclick="toggleContentOne()">Learn More</button>
+                    </div>
+                </div>
+                <div class="quote">
+                    <p style="color: red;"><b>Rakesh Vejandla</b></p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="profile_img text-center">
+                    <img src="~/Images/team/Akshay.jpg" class="img-fluid" id="profile_image_two" alt="main image"
+                         data-aos="zoom-out" data-aos-delay="300">
+                    <div class="profile_text_two" style="padding: 20px;">
+                        <button type="button" class="btn btn-info" onclick="toggleContentTwo()">Learn More</button>
+                    </div>
+                </div>
+                <div class="quote">
+                    <p><b>Akshay Kumar Reddy Nalla</b></p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="profile_img text-center">
+                    <img src="~/Images/team/manohar.jpeg" class="img-fluid" id="profile_image_three" alt="main image"
+                         data-aos="zoom-out" data-aos-delay="300">
+                    <div class="profile_text_three" style="padding: 20px;">
+                        <button type="button" class="btn btn-info" onclick="toggleContentThree()">Learn More</button>
+                    </div>
+                </div>
+                <div class="quote">
+                    <p><b>Manohar Reddy Pasham</b></p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="profile_img text-center">
+                    <img src="~/Images/team/Lavanya.jpeg" class="img-fluid" id="profile_image_four" alt="main image"
+                         data-aos="zoom-out" data-aos-delay="300">
+                    <div class="profile_text_four" style="padding: 20px;">
+                        <button type="button" class="btn btn-info" onclick="toggleContentFour()">Learn More</button>
+                    </div>
+                </div>
+                <div class="quote">
+                    <p><b>Lakshmi Lavanya Javvadi</b></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <button type="button" class="btn btn-info m-20" style="float: right;" id="toggle-all" class="toggle-all" onclick="toggleAll()">Remove All</button>
+    <section class="profiles d-flex">
+        <div class="all_profiles">
+            <article class="all_profiles_one" id="all_profiles_one">
+                <div class="each_profile">
+                    <h3 class="about-us-name"> Vejandla Rakesh</h3><br>
+                    <center class="about-us-image"><img src="~/Images/team/Rakesh.jpg"></center><br>
+                    <center class="about-us-link">
+                        <a style="text-decoration: none; color:#0072b1; font-size:22px;"
+                           href="https://www.linkedin.com/in/rakesh-vejandla-b6436b105/">Linked In </a>
+                    </center>
+                    <br>
+                </div>
+                <div class="about-us-text">
+                    <h3 class="">My Experience and Responsibilities</h3>
+                    <h4>Experience</h4>
+                    <p>
+                        I have a couple of years of experience in as a DOT Net Core Developer.
+                        I worked on the diiferent projects, where I designed, built, and configured applications to meet business process and application requirements.
+                        My ultimate goal is to become a Data Engineer.
+                    </p>
+                    <br>
+                    <h4>Responsibilities</h4>
+                    <p>
+                        I changed the static pages to MVC and put up the basic project for everyone to work on in this project. In addition, I worked on the project's Azure deployment.  My duties included retrieving data from an API endpoint, storing it in a database permanently, and making sure the database was updated on a regular basis with fresh information from the API.
+                    </p>
+                </div>
+            </article><br>
+            <article class=" all_profiles_two" id="all_profiles_two">
+                <div class="each_profile">
+                    <h3 class="about-us-name"> Akshay Kumar Reddy Nalla</h3><br>
+                    <center class="about-us-image"><img src="~/Images/team/Akshay.jpg"></center><br>
+                    <center class="about-us-link">
+                        <a style="text-decoration: none; color:#0072b1; font-size:22px;"
+                           href="https://www.linkedin.com/in/akshay-kumar-reddy-nalla-23170a248/">Linked In </a>
+                    </center>
+                    <br>
+                </div>
+                <div class="about-us-text">
+                    <h3 class="">My Experience and Responsibilities</h3>
+                    <h4>Experience</h4>
+                    <p>
+                        I am a passionate and driven individual, on a quest to unravel the endless possibilities of data science. Currently pursuing my Master's degree in Business Analytics & Information Systems, With a background in business analytics and financial analysis, I possess a unique skill set that allows me to approach data analysis from both a technical and business perspective. My goal is to become a data scientist and make a meaningful impact by unlocking the power of data to drive informed decision-making. With expertise in programming languages such as Python, R, and SAS, as well as proficiency in data visualization tools like Tableau, I am well-equipped to analyze and interpret complex datasets. By continuously expanding my knowledge and honing my skills in statistical modeling, machine learning, and data visualization, I am committed to achieving my goal and contributing to the advancement of the data-driven world.
+                    </p>
+                    <br>
+                    <h4>Responsibilities</h4>
+                    <p>
+                        I've made layout changes to the website to ensure that it is visually appealing and adaptable to all screen sizes. My goal has been to enhance the website's interactivity. This involves creating scroll ups, forms, drop-down navbars, and animations for page transitions in addition to creating header, footer, and body layouts for each page.
+                    </p>
+                </div>
+            </article><br>
+            <article class=" all_profiles_three" id="all_profiles_three">
+                <div class="each_profile">
+                    <h3 class="about-us-name"> Manohar Reddy Pasham</h3><br>
+                    <center class="about-us-image"><img src="~/Images/team/manohar.jpeg"></center><br>
+                    <center class="about-us-link">
+                        <a style="text-decoration: none; color:#0072b1; font-size:22px;"
+                           href="https://www.linkedin.com/in/pasham-manohar-reddy-b93461197/">Linked In </a>
+                    </center>
+                    <br>
+                </div>
+                <div class="about-us-text">
+                    <h3 class="">My Experience and Responsibilities</h3>
+                    <h4>Experience</h4>
+                    <p>
+                        I am Manohar Reddy Pasham, and I served as a Financial Data Analyst  from April 2019 to June 2022. In this role,
+                        I collected, processed, and analyzed data, utilizing advanced tools to develop detailed spreadsheets for trend identification and revenue,
+                        profitability, and expense forecasting. I conducted in-depth financial analysis, pinpointing operational changes,
+                        trends, and potential areas for improvement, while also presenting data-driven insights through dashboards and reports using Tableau and Power BI.
+                        Additionally, I conducted market research and competitive analysis, providing valuable information to shape financial strategies and investment decisions.
+                        I carried out cost-benefit analyses for potential investments, delivering recommendations to maximize returns
+                    </p>
+                    <br>
+                    <h4>Responsibilities</h4>
+                    <p>
+                        Creating the database model to hold the data and assisting with the webpage design were my contributions to the project. Furthermore, I developed the Models to build tables in the database and included the "Create Crash Record" feature to the Crash Records Page.
+                        I helped this project's webpage become responsive by carrying out CRUD operations, which let visitors interact with the data in real-time.
+                    </p>
+                </div>
+            </article><br>
+            <article class=" all_profiles_four" id="all_profiles_four">
+                <div class="each_profile">
+                    <h3 class="about-us-name">Lakshmi Lavanya Javvadi</h3><br>
+                    <center class="about-us-image"><img src="~/Images/team/Lavanya.jpeg"></center><br>
+                    <center class="about-us-link">
+                        <a style="text-decoration: none; color:#0072b1; font-size:22px;"
+                           href="https://www.linkedin.com/in/lakshmi-lavanya-javvadi-213226202/">Linked In </a>
+                    </center>
+                    <br>
+                </div>
+                <div class="about-us-text">
+                    <h3 class="">My Experience and Responsibilities</h3>
+                    <h4>Experience</h4>
+                    <p>
+                        I'm Lakshmi Lavanya Javvadi, a data analyst with one year of experience in the field. I became quite interested in data analysis while I was studying IT as an undergrad. I decided to pursue a career in this field because I was intrigued by how data may lead to beneficial outcomes for organizations and society. The ability of data to radically alter how decisions are made fascinates me.
+                        In the past, I worked at "Prodapt Solutions Private Limited"  as a data analyst, where my duties included gathering, analyzing, and interpreting data from various databases, surveys, and social media platforms. I carried out data cleansing, transformation, and visualization duties while also collecting valuable insights to assist strategic decision-making processes using tools including Excel, SQL, Python, and Tableau. I delivered data-driven recommendations to maximize business outcomes by working closely with cross-functional teams in marketing, sales, and product development.
+
+                    </p>
+                    <br>
+                    <h4>Responsibilities</h4>
+                    <p>
+                        In order to enhance data management, I included a backend View and  delete function that lets users see and erase data entries. I also incorporated a searching mechanism that lets users sort data according to filters.I have worked on updating operations on the details page in addition to retrieving data from the database and showing it on the details page.
+                    </p>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
