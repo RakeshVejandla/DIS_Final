@@ -11563,26 +11563,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Meghana\\.nuget\\packages\\": {}
+    "/Users/rakeshvejandla/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\source\\repos\\DIS-Project\\DIS-Project\\DIS-Project.csproj",
+      "projectUniqueName": "/Users/rakeshvejandla/Downloads/repos/DIS_Final/DIS_Final/DIS-Project/DIS-Project/DIS-Project.csproj",
       "projectName": "DIS-Project",
-      "projectPath": "D:\\source\\repos\\DIS-Project\\DIS-Project\\DIS-Project.csproj",
-      "packagesPath": "C:\\Users\\Meghana\\.nuget\\packages\\",
-      "outputPath": "D:\\source\\repos\\DIS-Project\\DIS-Project\\obj\\",
+      "projectPath": "/Users/rakeshvejandla/Downloads/repos/DIS_Final/DIS_Final/DIS-Project/DIS-Project/DIS-Project.csproj",
+      "packagesPath": "/Users/rakeshvejandla/.nuget/packages/",
+      "outputPath": "/Users/rakeshvejandla/Downloads/repos/DIS_Final/DIS_Final/DIS-Project/DIS-Project/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Meghana\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/rakeshvejandla/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -11665,7 +11663,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.402/RuntimeIdentifierGraph.json"
       }
     }
   },
